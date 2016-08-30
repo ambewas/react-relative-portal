@@ -18,7 +18,8 @@
     "build": "npm run clean && babel src/Portal.js > dist/Portal.js && babel src/RelativePortal.js > dist/RelativePortal.js",
     "clean": "rm -Rf dist && mkdir dist",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prepublish": "npm run build"
+    "prepublish": "npm run build",
+    "postintall": "npm run build"
   },
   "repository": {
     "type": "git",
