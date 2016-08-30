@@ -28,6 +28,7 @@ export default class RelativePortal extends React.Component {
     left: PropTypes.number,
     fullWidth: PropTypes.bool,
     top: PropTypes.number,
+    bottom: PropTypes.number,
     children: PropTypes.any,
     onOutClick: PropTypes.func,
     component: PropTypes.string.isRequired,
@@ -43,6 +44,7 @@ export default class RelativePortal extends React.Component {
     right: 0,
     left: 0,
     top: 0,
+    bottom: 0,
   };
 
   componentDidMount() {
@@ -50,11 +52,15 @@ export default class RelativePortal extends React.Component {
       if (this.element) {
         const rect = this.element.getBoundingClientRect();
         const top = window.scrollY + rect.top;
+        const bottom = window.scrollY + rect.bottom;
         const right = window.innerWidth - rect.right + window.scrollX;
         const left = window.scrollX + rect.left;
 
-        if (top !== this.state.top || left !== this.state.left || right !== this.state.right) {
-          this.setState({ left, top, right });
+        if (top !== this.state.top
+            || left !== this.state.left
+            || right !== this.state.right
+            || bottom !== this.state.bottom) {
+          this.setState({ left, top, right, bottom });
         }
       }
     };
@@ -71,7 +77,7 @@ export default class RelativePortal extends React.Component {
   }
 
   render() {
-    const { component: Comp, top, left, right, fullWidth, ...props } = this.props;
+    const { component: Comp, top, left, right, bottom, fullWidth, ...props } = this.props;
 
     const fromLeftOrRight = right !== undefined ?
       { right: this.state.right + right } :
@@ -79,6 +85,10 @@ export default class RelativePortal extends React.Component {
 
     const horizontalPosition = fullWidth ?
       { right: this.state.right + right, left: this.state.left + left } : fromLeftOrRight;
+
+    const verticalPosition = bottom !== undefined ?
+      { bottom: this.state.top + top } :
+      { top: this.state.top + top };
 
     return (
       <Comp
@@ -90,7 +100,7 @@ export default class RelativePortal extends React.Component {
           <div
             style={{
               position: 'absolute',
-              top: this.state.top + top,
+              ...verticalPosition,
               ...horizontalPosition,
             }}
           >
