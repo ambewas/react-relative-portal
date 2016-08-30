@@ -72,8 +72,7 @@ var RelativePortal = function (_React$Component) {
     return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = RelativePortal.__proto__ || Object.getPrototypeOf(RelativePortal)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
       right: 0,
       left: 0,
-      top: 0,
-      bottom: 0
+      top: 0
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
@@ -86,12 +85,11 @@ var RelativePortal = function (_React$Component) {
         if (_this2.element) {
           var rect = _this2.element.getBoundingClientRect();
           var top = window.scrollY + rect.top;
-          var bottom = window.scrollY + rect.bottom;
           var right = window.innerWidth - rect.right + window.scrollX;
           var left = window.scrollX + rect.left;
 
-          if (top !== _this2.state.top || left !== _this2.state.left || right !== _this2.state.right || bottom !== _this2.state.bottom) {
-            _this2.setState({ left: left, top: top, right: right, bottom: bottom });
+          if (top !== _this2.state.top || left !== _this2.state.left || right !== _this2.state.right) {
+            _this2.setState({ left: left, top: top, right: right });
           }
         }
       };
@@ -118,16 +116,13 @@ var RelativePortal = function (_React$Component) {
       var top = _props.top;
       var left = _props.left;
       var right = _props.right;
-      var bottom = _props.bottom;
       var fullWidth = _props.fullWidth;
 
-      var props = _objectWithoutProperties(_props, ['component', 'top', 'left', 'right', 'bottom', 'fullWidth']);
+      var props = _objectWithoutProperties(_props, ['component', 'top', 'left', 'right', 'fullWidth']);
 
       var fromLeftOrRight = right !== undefined ? { right: this.state.right + right } : { left: this.state.left + left };
 
       var horizontalPosition = fullWidth ? { right: this.state.right + right, left: this.state.left + left } : fromLeftOrRight;
-
-      var verticalPosition = bottom !== undefined ? { bottom: this.state.bottom + bottom } : { top: this.state.top + top };
 
       return _react2.default.createElement(
         Comp,
@@ -143,8 +138,9 @@ var RelativePortal = function (_React$Component) {
             'div',
             {
               style: _extends({
-                position: 'absolute'
-              }, verticalPosition, horizontalPosition)
+                position: 'absolute',
+                top: this.state.top + top
+              }, horizontalPosition)
             },
             this.props.children
           )
@@ -161,7 +157,6 @@ RelativePortal.propTypes = {
   left: _react.PropTypes.number,
   fullWidth: _react.PropTypes.bool,
   top: _react.PropTypes.number,
-  bottom: _react.PropTypes.number,
   children: _react.PropTypes.any,
   onOutClick: _react.PropTypes.func,
   component: _react.PropTypes.string.isRequired
