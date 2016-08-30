@@ -127,7 +127,7 @@ var RelativePortal = function (_React$Component) {
 
       var horizontalPosition = fullWidth ? { right: this.state.right + right, left: this.state.left + left } : fromLeftOrRight;
 
-      var verticalPosition = bottom !== undefined ? { bottom: this.state.top + top } : { top: this.state.top + top };
+      var verticalPosition = bottom !== undefined ? { bottom: this.state.bottom + bottom } : { top: this.state.top + top };
 
       return _react2.default.createElement(
         Comp,

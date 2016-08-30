@@ -87,7 +87,7 @@ export default class RelativePortal extends React.Component {
       { right: this.state.right + right, left: this.state.left + left } : fromLeftOrRight;
 
     const verticalPosition = bottom !== undefined ?
-      { bottom: this.state.top + top } :
+      { bottom: this.state.bottom + bottom } :
       { top: this.state.top + top };
 
     return (
