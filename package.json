@@ -19,11 +19,10 @@
     "clean": "rm -Rf dist && mkdir dist",
     "test": "echo \"Error: no test specified\" && exit 1",
     "prepublish": "npm run build",
-    "postinstall": "npm run build"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/smartprogress/react-relative-portal.git"
+    "url": "https://github.com/ambewas/react-relative-portal.git"
   },
   "author": "Alex Lunyov <isuntc@gmail.com>",
   "license": "MIT",
